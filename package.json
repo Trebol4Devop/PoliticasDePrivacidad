@@ -1,0 +1,20 @@
+{
+  "name": "politicas-de-privacidad-seguras",
+  "version": "1.0.0",
+  "description": "Sistema seguro de versionado de políticas con firmas digitales",
+  "private": true,
+  "scripts": {
+    "generate-keys": "node scripts/generate-keys.js",
+    "sign-policy": "node scripts/sign-policy.js",
+    "verify-policy": "node scripts/verify-policy.js",
+    "test": "node scripts/test-policy.js"
+  },
+  "keywords": [
+    "privacidad",
+    "seguridad",
+    "firmas-digitales",
+    "criptografía"
+  ],
+  "author": "Trebol4Devop",
+  "license": "MIT"
+}

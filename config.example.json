@@ -1,0 +1,6 @@
+{
+  "publicKeyFile": "keys/public-key.pem",
+  "policiesFolder": "src/politicas",
+  "signatureExtension": ".sig",
+  "hashAlgorithm": "sha256"
+}
