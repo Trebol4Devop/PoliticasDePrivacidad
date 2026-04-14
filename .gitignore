@@ -24,8 +24,5 @@ Thumbs.db
 yarn.lock
 
 # Assets locales no usados en la web publicada
-src/assets/Logo SANMU - 71x71.png
 src/assets/Logo Trebol Asociados.png
 src/assets/Logo Trébol Asociados.png
-src/assets/Logo Trebol Asociados_sinFondo.png
-src/assets/Logo Trébol Asociados_sinFondo.png

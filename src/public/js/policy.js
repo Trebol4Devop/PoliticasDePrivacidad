@@ -1,3 +1,27 @@
+function enablePageTransition() {
+    requestAnimationFrame(() => {
+        document.body.classList.add('is-visible');
+    });
+}
+
+function setupBackLinkDate() {
+    const backLink = document.getElementById('back-link');
+    if (!backLink) return;
+
+    const today = new Date().toLocaleDateString('es-ES');
+    backLink.title = 'Regresar al inicio';
+
+    backLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        const targetUrl = backLink.getAttribute('href') || './index.html';
+        document.body.classList.remove('is-visible');
+        document.body.classList.add('is-transitioning');
+        setTimeout(() => {
+            window.location.href = targetUrl;
+        }, 220);
+    });
+}
+
 // Convertir markdown simple a HTML
 function markdownToHtml(md) {
     let html = md;
@@ -84,3 +108,5 @@ async function loadPolicy() {
 }
 
 loadPolicy();
+setupBackLinkDate();
+enablePageTransition();

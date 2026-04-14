@@ -1,3 +1,26 @@
+function enablePageTransition() {
+    requestAnimationFrame(() => {
+        document.body.classList.add('is-visible');
+    });
+}
+
+function setupPolicyNavigationTransition() {
+    document.addEventListener('click', (event) => {
+        const link = event.target.closest('a.btn-view');
+        if (!link) return;
+
+        event.preventDefault();
+        const targetUrl = link.getAttribute('href');
+        if (!targetUrl) return;
+
+        document.body.classList.remove('is-visible');
+        document.body.classList.add('is-transitioning');
+        setTimeout(() => {
+            window.location.href = targetUrl;
+        }, 220);
+    });
+}
+
 // Cargar políticas
 async function loadPolicies() {
     try {
@@ -47,3 +70,5 @@ async function loadPolicies() {
 
 // Cargar al iniciar
 loadPolicies();
+setupPolicyNavigationTransition();
+enablePageTransition();
