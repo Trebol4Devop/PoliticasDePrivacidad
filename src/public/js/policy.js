@@ -94,7 +94,7 @@ async function loadPolicy() {
         const policyHtml = markdownToHtml(mdContent);
         const appBrandHtml = `
             <div class="policy-app-brand">
-                <img src="./assets/Logo SANMU - 71x71.png" alt="SANMU">
+                <img src="../assets/Logo SANMU - 71x71.png" alt="SANMU">
             </div>
         `;
         document.getElementById('content').innerHTML = appBrandHtml + policyHtml;
