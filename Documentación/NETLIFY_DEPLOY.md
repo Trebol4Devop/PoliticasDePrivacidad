@@ -5,8 +5,11 @@
 En Netlify, usar:
 
 - Branch: `main`
+- Base directory: dejar vacío
 - Build command: (vacío)
 - Publish directory: `src/public`
+
+Si Netlify te muestra una ruta duplicada como `src/public/src/public`, revisa la Base directory en la UI: no debe apuntar a `src/public` si ya estás publicando esa carpeta desde la raíz del repositorio.
 
 ## Flujo de publicación
 

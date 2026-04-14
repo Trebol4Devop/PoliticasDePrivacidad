@@ -23,6 +23,6 @@ keys/private*.key
 Thumbs.db
 yarn.lock
 
-# Assets locales no usados en la web publicada
-src/assets/Logo Trebol Asociados.png
-src/assets/Logo Trébol Asociados.png
+# public/assets locales no usados en la web publicada
+src/public/assets/Logo Trebol Asociados.png
+src/public/assets/Logo Trébol Asociados.png
