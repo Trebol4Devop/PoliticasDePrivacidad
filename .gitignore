@@ -1,0 +1,28 @@
+node_modules/
+*.log
+.env
+.DS_Store
+dist/
+build/
+# Ignorar todas las claves por defecto y permitir solo la pública
+keys/*
+!keys/public-key.pem
+
+# Bloqueo extra para cualquier posible archivo privado
+keys/private*.pem
+keys/private*.key
+*.private.key
+*.pem
+!keys/public-key.pem
+
+*.tmp
+.cache/
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+yarn.lock
+
+# Assets locales no usados en la web publicada
+src/assets/Logo Trebol Asociados.png
+src/assets/Logo Trébol Asociados.png
