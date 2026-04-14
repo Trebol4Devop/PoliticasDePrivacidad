@@ -3,11 +3,6 @@
 /**
  * Script para generar par de claves RSA
  * Uso: npm run generate-keys
- * 
- * IMPORTANTE: 
- * - Guarda las claves en lugar seguro
- * - NUNCA subas la clave privada a Git
- * - La clave pública se puede compartir públicamente
  */
 
 const crypto = require('crypto');
@@ -16,7 +11,6 @@ const path = require('path');
 
 const keysDir = path.join(__dirname, '../keys');
 
-// Crear directorio si no existe
 if (!fs.existsSync(keysDir)) {
   fs.mkdirSync(keysDir, { recursive: true });
 }
@@ -51,17 +45,3 @@ console.log('   - La clave privada debe estar protegida');
 console.log('   - NUNCA la subas a Git o repositorios publicos');
 console.log('   - Guardala en un lugar seguro');
 console.log('   - Puedes compartir la clave publica publicamente para verificacion\n');
-
-// Crear archivo de configuración de ejemplo
-const configExample = {
-  publicKeyFile: 'keys/public-key.pem',
-  policiesFolder: 'src/politicas',
-  signatureExtension: '.sig',
-  hashAlgorithm: 'sha256'
-};
-
-const configPath = path.join(__dirname, '../config.example.json');
-if (!fs.existsSync(configPath)) {
-  fs.writeFileSync(configPath, JSON.stringify(configExample, null, 2));
-  console.log(`Archivo de configuracion de ejemplo: ${configPath}`);
-}
