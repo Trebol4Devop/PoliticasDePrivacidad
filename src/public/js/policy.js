@@ -223,7 +223,7 @@ async function loadPolicy() {
                     <div style="margin-bottom: 12px;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#A80000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></div>
                     <h3 style="color: #A80000; margin-bottom: 8px;">Error al cargar el documento</h3>
                     <p style="color: var(--text-secondary);">${error.message}</p>
-                    <a href="./index.html" class="back-btn" style="margin-top: 16px; display: inline-flex;">← Volver al listado</a>
+                    <a href="./index.html" class="back-btn" style="margin-top: 16px; display: inline-flex;">← Volver</a>
                 </div>
             `;
         }
@@ -290,6 +290,71 @@ function setupContactModal() {
     }
 }
 
+// Menús y submenús móviles interactivos
+function setupMobileSubmenus() {
+    // 1. Submenú de herramientas en barra superior
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const submenu = document.getElementById('mobile-submenu');
+    const mobileCopyBtn = document.getElementById('mobile-copy-btn');
+    const mobilePrintBtn = document.getElementById('mobile-print-btn');
+
+    if (menuBtn && submenu) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            submenu.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!submenu.contains(e.target) && e.target !== menuBtn) {
+                submenu.classList.remove('active');
+            }
+        });
+    }
+
+    if (mobileCopyBtn) {
+        mobileCopyBtn.addEventListener('click', () => {
+            if (submenu) submenu.classList.remove('active');
+            const copyBtn = document.getElementById('copy-link-btn');
+            if (copyBtn) copyBtn.click();
+            else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Enlace copiado al portapapeles');
+            }
+        });
+    }
+
+    if (mobilePrintBtn) {
+        mobilePrintBtn.addEventListener('click', () => {
+            if (submenu) submenu.classList.remove('active');
+            window.print();
+        });
+    }
+
+    // 2. Acordeón plegable para Tabla de Contenidos (TOC) en modo móvil/tableta
+    const tocHeader = document.getElementById('toc-header');
+    const tocSidebar = document.getElementById('toc-sidebar');
+    const tocList = document.getElementById('toc-list');
+
+    if (tocHeader && tocSidebar) {
+        tocHeader.addEventListener('click', () => {
+            tocSidebar.classList.toggle('expanded');
+            const isExp = tocSidebar.classList.contains('expanded');
+            tocHeader.setAttribute('aria-expanded', isExp);
+        });
+
+        if (tocList) {
+            tocList.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A' || e.target.closest('a')) {
+                    if (window.innerWidth <= 900) {
+                        tocSidebar.classList.remove('expanded');
+                        tocHeader.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+        }
+    }
+}
+
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
     initReaderTools();
@@ -298,4 +363,5 @@ document.addEventListener('DOMContentLoaded', () => {
     enablePageTransition();
     setupScrollElevation();
     setupContactModal();
+    setupMobileSubmenus();
 });
