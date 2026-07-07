@@ -3,29 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidad</title>
+    <meta name="description" content="Lectura de Política de Privacidad de aplicaciones SANMU y Trébol Asociados.">
+    <title>Política de Privacidad | Trébol Asociados</title>
     <link rel="icon" href="./assets/Logo Trébol Asociados_sinFondo.png" type="image/png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="css/policy.css">
 </head>
 <body>
-    <div class="header">
-        <div class="header-inner">
-            <div class="brand-block">
-                <h1 id="page-title">Política de Privacidad</h1>
+    <!-- Sticky Reader Navbar -->
+    <nav class="reader-nav">
+        <div class="reader-nav-inner">
+            <div class="nav-left">
+                <a href="./index.html" id="back-link" class="back-btn" aria-label="Regresar al centro de privacidad">
+                    ← Volver al Centro de Privacidad
+                </a>
+                <span id="nav-policy-title" class="reader-title-display">Cargando política...</span>
+            </div>
+            
+            <div class="nav-right">
+                <button id="copy-link-btn" class="tool-btn" title="Copiar enlace directo">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    Copiar enlace
+                </button>
+                <button id="print-btn" class="tool-btn" title="Imprimir documento o guardar como PDF">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                    Imprimir
+                </button>
             </div>
         </div>
+    </nav>
+
+    <!-- Main Reader Layout - Microsoft Learn Style -->
+    <div class="reader-container">
+        <!-- Sticky Sidebar - Table of Contents -->
+        <aside class="toc-sidebar">
+            <h3 class="toc-title">Contenido de la página</h3>
+            <ul id="toc-list" class="toc-list">
+                <li class="toc-item"><span style="color: var(--text-muted);">Generando índice...</span></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Card -->
+        <main class="reader-content-card">
+            <!-- Document Header -->
+            <header class="doc-header">
+                <img src="./assets/Logo SANMU - 71x71.png" alt="SANMU App" class="doc-logo">
+                <div class="doc-meta">
+                    <h1 id="page-title" class="doc-app-name">Política de Privacidad</h1>
+                    <span id="doc-platform" class="doc-platform-badge">Plataforma Oficial</span>
+                </div>
+            </header>
+
+            <!-- Rendered Markdown Content -->
+            <article id="content" class="markdown-body">
+                <p style="text-align: center; padding: 40px 0; color: var(--text-muted);">
+                    Cargando documento...
+                </p>
+            </article>
+        </main>
     </div>
 
-    <div class="container">
-        <a href="./index.html" id="back-link" class="back-link" aria-label="Regresar al inicio">←</a>
-
-        <div id="content">
-            <p style="text-align: center;">Cargando política...</p>
+    <!-- Minimalist Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img src="./assets/Logo Trébol Asociados_sinFondo.png" alt="Trébol Asociados" class="footer-logo">
+                <span>&copy; 2026 <strong>Trébol Asociados</strong>. Todos los derechos reservados.</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <a href="#contact" id="contact-link" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.15s ease;">Contacto</a>
+                <a href="./index.html" style="color: var(--accent-blue); text-decoration: none; font-weight: 600;">← Volver al listado</a>
+            </div>
         </div>
-    </div>
+    </footer>
 
-    <div class="logo">
-        <img src="./assets/ByTrebol4Devop.png" alt="Trebol4Devop" class="footer-logo">
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Contacto de Soporte</h3>
+                <button id="close-contact-btn" class="modal-close" aria-label="Cerrar modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">
+                    Para cualquier duda, consulta o ejercicio de derechos sobre tus datos personales y nuestras políticas de privacidad, puedes escribirnos directamente:
+                </p>
+                <div class="email-box">
+                    <span class="email-text">trebol4devop@proton.me</span>
+                    <button id="copy-email-btn" class="btn-secondary" title="Copiar correo">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        Copiar
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="mailto:trebol4devop@proton.me?subject=Consulta%20sobre%20Políticas%20de%20Privacidad" class="btn-primary" target="_blank" rel="noopener noreferrer">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    Abrir app de correo
+                </a>
+            </div>
+        </div>
     </div>
 
     <script src="js/policy.js"></script>
