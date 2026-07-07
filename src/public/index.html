@@ -3,39 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Políticas de privacidad">
-    <title>Políticas de Privacidad</title>
+    <meta name="description" content="Consulta las políticas de privacidad oficiales y compromisos sobre protección de datos de Trébol Asociados y aplicaciones SANMU.">
+    <title>Políticas de Privacidad | Trébol Asociados</title>
     <link rel="icon" href="./assets/Logo Trébol Asociados_sinFondo.png" type="image/png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-inner">
-                <div class="brand-block">
-                    <h1>
-                        <span>Políticas de Privacidad</span>
-                    </h1>
-                </div>
-            </div>
-        </header>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="./index.html" class="nav-brand">
+                <img src="./assets/Logo Trébol Asociados_sinFondo.png" alt="Trébol Asociados" class="nav-logo">
+                <span class="nav-title">Trébol Asociados</span>
+                <span class="nav-divider">|</span>
+                <span class="nav-subtitle">Centro de Privacidad</span>
+            </a>
+        </div>
+    </nav>
 
-        <div class="content">
-            <div class="policies-section">
-                <h2>Políticas disponibles</h2>
-                <div id="policies-container" class="policy-list">
-                    <div class="loading">Cargando políticas...</div>
-                </div>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-inner">
+            <h1 class="hero-title">Políticas de Privacidad</h1>
+            <p class="hero-subtitle">
+                Consulta nuestros compromisos sobre privacidad, protección de datos y transparencia en nuestras aplicaciones y servicios oficiales.
+            </p>
+        </div>
+    </header>
+
+    <!-- Search & Filter Toolbar -->
+    <div class="toolbar-container">
+        <div class="toolbar">
+            <div class="search-box">
+                <span class="search-icon">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </span>
+                <input type="text" id="search-input" class="search-input" placeholder="Buscar política por nombre, plataforma o palabra clave...">
+            </div>
+            
+            <div class="filter-group">
+                <span class="filter-label">Filtrar por:</span>
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="googleplay">Google Play</button>
+                <button class="filter-btn" data-filter="microsoftstore">Microsoft Store</button>
+                <button class="filter-btn" data-filter="es">Español</button>
+                <button class="filter-btn" data-filter="en">English</button>
             </div>
         </div>
-
-        <footer>
-            <p>Última actualización: <span id="last-update">---</span></p>
-        </footer>
     </div>
-    
-    <div class="logo">
-        <img src="./assets/ByTrebol4Devop.png" alt="Trebol4Devop" class="footer-logo">
+
+    <!-- Main Content Area -->
+    <main class="main-container">
+        <div class="section-header">
+            <h2 class="section-title">
+                Documentos disponibles
+                <span id="policy-count" class="policy-count">0</span>
+            </h2>
+        </div>
+
+        <div id="policies-container" class="policy-grid">
+            <div class="state-box">
+                <div class="spinner"></div>
+                <p>Cargando políticas de privacidad...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Minimalist Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <div class="footer-brand">
+                    <img src="./assets/Logo Trébol Asociados_sinFondo.png" alt="Trébol Asociados" style="height: 28px;">
+                    <span>Trébol Asociados</span>
+                </div>
+                <p class="footer-copy">
+                    &copy; 2026 Trébol Asociados. Todos los derechos reservados. Última actualización: <strong id="last-update">---</strong>
+                </p>
+            </div>
+            
+            <div class="footer-right">
+                <ul class="footer-links">
+                    <li><a href="#contact" id="contact-link">Contacto</a></li>
+                </ul>
+                <a href="#" title="Desarrollado por Trebol4Devop">
+                    <img src="./assets/ByTrebol4Devop.png" alt="Trebol4Devop" class="trebol-devop-logo">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Contacto de Soporte</h3>
+                <button id="close-contact-btn" class="modal-close" aria-label="Cerrar modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc">
+                    Para cualquier duda, consulta o ejercicio de derechos sobre tus datos personales y nuestras políticas de privacidad, puedes escribirnos directamente:
+                </p>
+                <div class="email-box">
+                    <span class="email-text">trebol4devop@proton.me</span>
+                    <button id="copy-email-btn" class="btn-secondary" title="Copiar correo">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        Copiar
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="mailto:trebol4devop@proton.me?subject=Consulta%20sobre%20Políticas%20de%20Privacidad" class="btn-primary" target="_blank" rel="noopener noreferrer">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    Abrir app de correo
+                </a>
+            </div>
+        </div>
     </div>
 
     <script src="js/main.js"></script>
