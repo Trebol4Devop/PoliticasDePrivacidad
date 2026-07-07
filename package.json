@@ -4,6 +4,8 @@
   "description": "Sistema seguro de versionado de políticas con firmas digitales",
   "private": true,
   "scripts": {
+    "dev": "npx -y serve src/public",
+    "start": "npx -y serve src/public",
     "generate-keys": "node scripts/generate-keys.js",
     "sign-policy": "node scripts/sign-policy.js",
     "verify-policy": "node scripts/verify-policy.js",
