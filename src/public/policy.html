@@ -19,21 +19,44 @@
     <nav class="reader-nav">
         <div class="reader-nav-inner">
             <div class="nav-left">
-                <a href="./index.html" id="back-link" class="back-btn" aria-label="Regresar al centro de privacidad">
-                    ← Volver al Centro de Privacidad
+                <a href="./index.html" id="back-link" class="back-btn" aria-label="Volver">
+                    ← Volver
                 </a>
                 <span id="nav-policy-title" class="reader-title-display">Cargando política...</span>
             </div>
             
             <div class="nav-right">
-                <button id="copy-link-btn" class="tool-btn" title="Copiar enlace directo">
+                <button id="copy-link-btn" class="tool-btn desktop-only" title="Copiar enlace directo">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    Copiar enlace
+                    <span>Copiar enlace</span>
                 </button>
-                <button id="print-btn" class="tool-btn" title="Imprimir documento o guardar como PDF">
+                <button id="print-btn" class="tool-btn desktop-only" title="Imprimir documento o guardar como PDF">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-                    Imprimir
+                    <span>Imprimir</span>
                 </button>
+
+                <!-- Mobile Tools Submenu Button -->
+                <div class="mobile-submenu-container mobile-only">
+                    <button id="mobile-menu-btn" class="tool-btn submenu-trigger" aria-label="Opciones y herramientas">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                        <span>Opciones</span>
+                    </button>
+                    <!-- Submenu Dropdown -->
+                    <div id="mobile-submenu" class="submenu-dropdown">
+                        <button id="mobile-copy-btn" class="submenu-item">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <span>Copiar enlace</span>
+                        </button>
+                        <button id="mobile-print-btn" class="submenu-item">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                            <span>Imprimir / PDF</span>
+                        </button>
+                        <a href="#contact" class="submenu-item contact-trigger">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <span>Contactar Soporte</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -41,8 +64,11 @@
     <!-- Main Reader Layout - Microsoft Learn Style -->
     <div class="reader-container">
         <!-- Sticky Sidebar - Table of Contents -->
-        <aside class="toc-sidebar">
-            <h3 class="toc-title">Contenido de la página</h3>
+        <aside class="toc-sidebar" id="toc-sidebar">
+            <div class="toc-header" id="toc-header" role="button" aria-expanded="false" tabindex="0">
+                <h3 class="toc-title">Contenido del documento</h3>
+                <span class="toc-toggle-icon" aria-hidden="true">▼</span>
+            </div>
             <ul id="toc-list" class="toc-list">
                 <li class="toc-item"><span style="color: var(--text-muted);">Generando índice...</span></li>
             </ul>
@@ -77,7 +103,7 @@
             </div>
             <div style="display: flex; align-items: center; gap: 20px;">
                 <a href="#contact" id="contact-link" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: color 0.15s ease;">Contacto</a>
-                <a href="./index.html" style="color: var(--accent-blue); text-decoration: none; font-weight: 600;">← Volver al listado</a>
+                <a href="./index.html" style="color: var(--accent-blue); text-decoration: none; font-weight: 600;">← Volver</a>
             </div>
         </div>
     </footer>
