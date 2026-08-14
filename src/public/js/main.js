@@ -29,6 +29,9 @@ function setupPolicyNavigationTransition() {
 
 // Formateadores para insignias de plataforma e idioma
 function formatPlatform(policyId, policyName) {
+    if (policyId.includes('pemtree') || policyName.toLowerCase().includes('pemtree') || policyId.includes('web')) {
+        return '<span class="platform-badge">Web App</span>';
+    }
     if (policyId.includes('googleplay') || policyName.toLowerCase().includes('google play')) {
         return '<span class="platform-badge">Google Play</span>';
     }
@@ -93,10 +96,17 @@ function renderPolicies() {
     // Filtrar por categoría y búsqueda
     const filtered = allPolicies.filter(policy => {
         let matchesFilter = true;
-        if (currentFilter === 'googleplay') matchesFilter = policy.id.includes('googleplay');
-        else if (currentFilter === 'microsoftstore') matchesFilter = policy.id.includes('microsoftstore');
-        else if (currentFilter === 'es') matchesFilter = policy.id.includes('_es_');
-        else if (currentFilter === 'en') matchesFilter = policy.id.includes('_en_');
+        if (currentFilter === 'webapp' || currentFilter === 'web' || currentFilter === 'pemtree') {
+            matchesFilter = policy.id.includes('pemtree') || policy.id.includes('web');
+        } else if (currentFilter === 'googleplay') {
+            matchesFilter = policy.id.includes('googleplay');
+        } else if (currentFilter === 'microsoftstore') {
+            matchesFilter = policy.id.includes('microsoftstore');
+        } else if (currentFilter === 'es') {
+            matchesFilter = policy.id.includes('_es_');
+        } else if (currentFilter === 'en') {
+            matchesFilter = policy.id.includes('_en_');
+        }
 
         let matchesSearch = true;
         if (searchQuery.trim() !== '') {

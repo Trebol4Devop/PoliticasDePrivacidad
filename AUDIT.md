@@ -1,3 +1,39 @@
+## 2026-08-14T05:38:02.341Z
+- **Archivo**: privacy_en_microsoftstore.md
+- **Hash**: `8a97a52f8f57551a9604a971073565372a6602fbf6a655f547d46187586d782b`
+- **Accion**: Documento firmado
+- **Algoritmo**: RSA-SHA256
+
+## 2026-08-14T05:38:01.991Z
+- **Archivo**: privacy_es_microsoftstore.md
+- **Hash**: `6a9a17b4301f55dfa877bd3bd47254f6fe03e6bc6f3a7c37dc3665c699c3daed`
+- **Accion**: Documento firmado
+- **Algoritmo**: RSA-SHA256
+
+## 2026-08-14T05:37:56.876Z
+- **Archivo**: privacy_en_googleplay.md
+- **Hash**: `81eebe8e56ae06f62d006d9e3f5fc833d19420b94b1d27796bce74b2268144bb`
+- **Accion**: Documento firmado
+- **Algoritmo**: RSA-SHA256
+
+## 2026-08-14T05:36:45.752Z
+- **Archivo**: privacy_es_googleplay.md
+- **Hash**: `2ef95519ba79789fd266ea813205fd9ea0ab975729cb2f131f32eb36f18574b6`
+- **Accion**: Documento firmado
+- **Algoritmo**: RSA-SHA256
+
+## 2026-08-14T05:36:39.577Z
+- **Archivo**: privacy_en_pemtree.md
+- **Hash**: `fa4f178abd5c89c93d1a123fad6c1bb0280c418820ed44dc68d4f790d47d8516`
+- **Accion**: Documento firmado
+- **Algoritmo**: RSA-SHA256
+
+## 2026-08-14T05:36:29.320Z
+- **Archivo**: privacy_es_pemtree.md
+- **Hash**: `6646d7994dd01531ac43f6824432be7da1761e105cb48693a08165842f297a8f`
+- **Accion**: Documento firmado
+- **Algoritmo**: RSA-SHA256
+
 ## 2026-04-14T16:26:29.992Z
 - **Archivo**: privacy_es_microsoftstore.md
 - **Hash**: `6a9a17b4301f55dfa877bd3bd47254f6fe03e6bc6f3a7c37dc3665c699c3daed`

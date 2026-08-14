@@ -339,6 +339,68 @@ body.is-transitioning {
     color: var(--text-primary);
 }
 
+/* Tables & Data Grid */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin: 24px 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.markdown-body table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    background: var(--bg-card);
+}
+
+.markdown-body th {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+}
+
+.markdown-body td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    vertical-align: top;
+}
+
+.markdown-body tr:last-child td {
+    border-bottom: none;
+}
+
+.markdown-body tr:nth-child(even) td {
+    background: rgba(0, 0, 0, 0.015);
+}
+
+/* Inline Code & Technical Tags */
+.markdown-body code {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
+    font-size: 0.88em;
+    color: var(--accent-blue);
+    word-break: break-word;
+}
+
+/* Horizontal Dividers */
+.doc-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 36px 0;
+}
+
 /* Minimalist Footer */
 .footer {
     background: var(--bg-secondary);
