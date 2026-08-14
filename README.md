@@ -38,7 +38,7 @@ Mantener políticas públicas verificables, con integridad trazable y flujo oper
 
 - Node.js 18+
 - npm
-- Python 3 (solo para servidor local opcional)
+- Python 3
 
 ## Comandos
 
