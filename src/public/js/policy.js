@@ -45,55 +45,180 @@ function initReaderTools() {
     }
 }
 
-// Convertidor de Markdown con IDs para la tabla de contenidos
+// Formateo de texto en línea (código, negrita, cursiva, enlaces)
+function formatInlineMarkdown(text) {
+    if (!text) return '';
+    let s = text;
+    // Código en línea
+    s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+    // Negrita
+    s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    // Cursiva
+    s = s.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    // Enlaces markdown
+    s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1 ↗</a>');
+    return s;
+}
+
+// Convertidor de Markdown a HTML robusto con soporte de tablas, listas, código y IDs para la tabla de contenidos
 function markdownToHtmlWithIds(md) {
-    let html = md;
+    const lines = md.split(/\r?\n/);
+    const html = [];
     let headingCount = 0;
+    let inTable = false;
+    let tableRows = [];
+    let inUl = false;
+    let inOl = false;
+    let inBlockquote = false;
+    let blockquoteLines = [];
 
-    // Blockquotes
-    html = html.replace(/^> (.*?)$/gm, '<blockquote>$1</blockquote>');
+    function flushBlockquote() {
+        if (inBlockquote) {
+            html.push(`<blockquote>${blockquoteLines.join('<br>')}</blockquote>`);
+            blockquoteLines = [];
+            inBlockquote = false;
+        }
+    }
 
-    // Encabezados H3
-    html = html.replace(/^### (.*?)$/gm, (match, title) => {
-        headingCount++;
-        const id = `section-${headingCount}`;
-        return `<h3 id="${id}" class="doc-heading level-3">${title}</h3>`;
-    });
+    function flushList() {
+        if (inUl) {
+            html.push('</ul>');
+            inUl = false;
+        }
+        if (inOl) {
+            html.push('</ol>');
+            inOl = false;
+        }
+    }
 
-    // Encabezados H2
-    html = html.replace(/^## (.*?)$/gm, (match, title) => {
-        headingCount++;
-        const id = `section-${headingCount}`;
-        return `<h2 id="${id}" class="doc-heading level-2">${title}</h2>`;
-    });
+    function flushTable() {
+        if (inTable) {
+            if (tableRows.length > 0) {
+                let tableHtml = '<div class="table-container"><table>';
+                const headerRow = tableRows[0];
+                let startBody = 1;
+                if (tableRows.length > 1 && /^\|?[\s-:]+\|[\s\-:|]+$/.test(tableRows[1].trim())) {
+                    startBody = 2;
+                }
+                
+                // Encabezados
+                const ths = headerRow.split('|').filter((c, i, a) => !(i === 0 && c === '') && !(i === a.length - 1 && c === ''));
+                tableHtml += '<thead><tr>' + ths.map(c => `<th>${formatInlineMarkdown(c.trim())}</th>`).join('') + '</tr></thead>';
+                
+                // Cuerpo de la tabla
+                tableHtml += '<tbody>';
+                for (let r = startBody; r < tableRows.length; r++) {
+                    const rowText = tableRows[r].trim();
+                    if (!rowText || /^\|?[\s-:]+\|[\s\-:|]+$/.test(rowText)) continue;
+                    const tds = rowText.split('|').filter((c, i, a) => !(i === 0 && c === '') && !(i === a.length - 1 && c === ''));
+                    tableHtml += '<tr>' + tds.map(c => `<td>${formatInlineMarkdown(c.trim())}</td>`).join('') + '</tr>';
+                }
+                tableHtml += '</tbody></table></div>';
+                html.push(tableHtml);
+            }
+            tableRows = [];
+            inTable = false;
+        }
+    }
 
-    // Encabezado H1
-    html = html.replace(/^# (.*?)$/gm, '<h1>$1</h1>');
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const trimmed = line.trim();
 
-    // Negritas e Itálicas
-    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        // Línea vacía
+        if (!trimmed) {
+            flushTable();
+            flushList();
+            flushBlockquote();
+            continue;
+        }
 
-    // Enlaces
-    html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1 ↗</a>');
+        // Regla horizontal (separador)
+        if (/^(\-{3,}|\*{3,}|_{3,})$/.test(trimmed)) {
+            flushTable();
+            flushList();
+            flushBlockquote();
+            html.push('<hr class="doc-divider">');
+            continue;
+        }
 
-    // Listas
-    html = html.replace(/^- (.*?)$/gm, '<li>$1</li>');
-    html = html.replace(/^\* (.*?)$/gm, '<li>$1</li>');
+        // Fila de tabla
+        if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+            flushList();
+            flushBlockquote();
+            inTable = true;
+            tableRows.push(trimmed);
+            continue;
+        } else if (inTable) {
+            flushTable();
+        }
 
-    html = html.replace(/(<li>.*?<\/li>\n?)+/g, (match) => {
-        return `<ul>${match}</ul>`;
-    });
+        // Citas / Blockquotes
+        if (trimmed.startsWith('>')) {
+            flushTable();
+            flushList();
+            inBlockquote = true;
+            blockquoteLines.push(formatInlineMarkdown(trimmed.replace(/^>\s*/, '')));
+            continue;
+        } else if (inBlockquote) {
+            flushBlockquote();
+        }
 
-    // Párrafos
-    html = html.split('\n\n').map(block => {
-        const trimmed = block.trim();
-        if (!trimmed) return '';
-        if (trimmed.match(/^<(h1|h2|h3|ul|ol|blockquote|li)/)) return trimmed;
-        return '<p>' + trimmed.replace(/\n/g, '<br>') + '</p>';
-    }).join('\n');
+        // Encabezados
+        if (trimmed.startsWith('### ')) {
+            flushTable();
+            flushList();
+            headingCount++;
+            const id = `section-${headingCount}`;
+            const title = formatInlineMarkdown(trimmed.substring(4));
+            html.push(`<h3 id="${id}" class="doc-heading level-3">${title}</h3>`);
+            continue;
+        }
+        if (trimmed.startsWith('## ')) {
+            flushTable();
+            flushList();
+            headingCount++;
+            const id = `section-${headingCount}`;
+            const title = formatInlineMarkdown(trimmed.substring(3));
+            html.push(`<h2 id="${id}" class="doc-heading level-2">${title}</h2>`);
+            continue;
+        }
+        if (trimmed.startsWith('# ')) {
+            flushTable();
+            flushList();
+            const title = formatInlineMarkdown(trimmed.substring(2));
+            html.push(`<h1>${title}</h1>`);
+            continue;
+        }
 
-    return html;
+        // Listas desordenadas
+        if (/^[-*]\s+/.test(trimmed)) {
+            flushTable();
+            if (inOl) { html.push('</ol>'); inOl = false; }
+            if (!inUl) { html.push('<ul>'); inUl = true; }
+            html.push(`<li>${formatInlineMarkdown(trimmed.replace(/^[-*]\s+/, ''))}</li>`);
+            continue;
+        }
+
+        // Listas numeradas
+        if (/^\d+\.\s+/.test(trimmed)) {
+            flushTable();
+            if (inUl) { html.push('</ul>'); inUl = false; }
+            if (!inOl) { html.push('<ol>'); inOl = true; }
+            html.push(`<li>${formatInlineMarkdown(trimmed.replace(/^\d+\.\s+/, ''))}</li>`);
+            continue;
+        }
+
+        // Texto regular
+        flushList();
+        html.push(`<p>${formatInlineMarkdown(trimmed)}</p>`);
+    }
+
+    flushTable();
+    flushList();
+    flushBlockquote();
+
+    return html.join('\n');
 }
 
 // Generar Índice de Contenidos (Estilo Microsoft Docs)
@@ -176,6 +301,7 @@ async function loadPolicy() {
     const titleEl = document.getElementById('page-title');
     const navTitleEl = document.getElementById('nav-policy-title');
     const platformEl = document.getElementById('doc-platform');
+    const logoEl = document.getElementById('doc-app-logo');
 
     try {
         const params = new URLSearchParams(window.location.search);
@@ -201,12 +327,31 @@ async function loadPolicy() {
         }
 
         if (platformEl) {
-            if (policyId.includes('googleplay')) platformEl.textContent = 'Google Play (Android)';
-            else if (policyId.includes('microsoftstore')) platformEl.textContent = 'Microsoft Store (Windows)';
-            else platformEl.textContent = 'Documento Oficial';
+            if (policyId.includes('pemtree') || policyId.includes('web')) {
+                platformEl.textContent = 'Web App Oficial (Netlify)';
+            } else if (policyId.includes('googleplay')) {
+                platformEl.textContent = 'Google Play (Android)';
+            } else if (policyId.includes('microsoftstore')) {
+                platformEl.textContent = 'Microsoft Store (Windows)';
+            } else {
+                platformEl.textContent = 'Documento Oficial';
+            }
         }
 
-        const mdResponse = await fetch(`/politicas/${policyId}.md`);
+        if (logoEl) {
+            if (policyId.includes('pemtree')) {
+                logoEl.src = './assets/Logo Trébol Asociados_sinFondo.png';
+                logoEl.alt = 'PEMTREE';
+            } else if (policyId.includes('googleplay') || policyId.includes('microsoftstore') || policyId.includes('samnu')) {
+                logoEl.src = './assets/Logo SANMU - 71x71.png';
+                logoEl.alt = 'SANMU';
+            } else {
+                logoEl.src = './assets/Logo Trébol Asociados_sinFondo.png';
+                logoEl.alt = 'Trébol Asociados';
+            }
+        }
+
+        const mdResponse = await fetch(`./politicas/${policyId}.md`);
         if (!mdResponse.ok) throw new Error('No se encontró el archivo de la política.');
         
         const mdContent = await mdResponse.text();
